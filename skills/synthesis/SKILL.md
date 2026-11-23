@@ -39,6 +39,10 @@ At the end of this phase, append `"synthesis"` to `completed_phases`, update `ar
 - `../../references/counter-argument-sources.md` — the three tributaries you must address in Step 4. Do not invent your own; pull them from `sense-check.md`.
 - `../../references/expert-anchor-and-conflicts.md` — the expert-anchor rule for quantitative claims and the insight-before-data rule used in Step 3.
 - `references/storyline-patterns.md` — when to lead with the answer, when to compare options, when to phase a roadmap.
+- `../../references/strategic-advisor-standard.md` — §1 (take a position), §3 (labels), §6 (value case), §7 (options and trade-offs), §8 (re-applying the red team to the formed recommendation), §9 (recommendation quality bar), §10 (execution plan and decision gates), §11 (depth by stakes tier).
+- `../../references/domains/*.md` — if the Precision Anchor lists domain modules, apply the synthesis row of each module's Phase hooks (e.g. the venture verdict scale; the healthcare use-case × evidence-plan recommendation shape).
+
+**Synthesis answers the decision; it does not summarize research.** Every step below serves the Decision in the Precision Anchor.
 
 These references are the source of truth. The steps below are the phase-specific actions; they do not re-explain the underlying doctrine.
 
@@ -75,6 +79,18 @@ Test the answer:
 - Does it directly answer the question from the problem definition? **Re-read the Precision Anchor — does the governing message address the exact question, decision, scope, and success metric?**
 - Would a CEO hearing only this sentence understand what to do?
 - **Precision test**: Place the Precision Anchor question and the governing message side by side. Does the answer match the question, or has it drifted? If it answers an easier or adjacent question, rewrite it.
+- **Position test**: Does it choose? "Option A and Option B both have merit" fails. If the evidence genuinely does not allow a choice, the governing message says so and names the missing evidence and the decision it blocks ("Do not commit to X until Y is established; run Z first") — that is a position.
+- **Premise test**: If problem-definition recorded `Reframed` or `Challenged` in the Premise check, the governing message answers the question the user confirmed at Checkpoint 1 and states the premise finding if it still matters to the decision.
+
+### Step 1.5: Compare the Options (Standard §7)
+Take the Options in scope from the Decision Frame (revise them if research showed an option is infeasible or surfaced a better one — record why).
+1. Confirm the options are genuinely distinct and that status quo / do-minimum is included where it is a real alternative.
+2. Choose 4–6 decision-relevant criteria (fewer for `tactical`). Weight them only if the client's priorities justify it; otherwise rank qualitatively with evidence.
+3. Fill the comparison from validated evidence; mark cells that rest on ASSUMPTION or UNKNOWN.
+4. State the winner, why it wins, why each credible alternative loses, and the conditions under which a rejected option would become preferable.
+5. If the comparison contradicts the Step 1 governing message, rewrite the governing message — the comparison governs.
+
+If the Deliverable Blueprint is reference/coverage-type and no choice is being made, write one sentence: "Option comparison not applicable: [reason]." Do not omit silently.
 
 ### Step 2: Identify the 2-4 Key Arguments
 Distill the evidence into the 2-4 arguments that most powerfully support the answer. Each argument should:
@@ -176,6 +192,18 @@ For each counter-argument, show that:
 
 A storyline that addresses only the most obvious objection while ignoring client-raised concerns or operational risks will lose credibility.
 
+**Red-team the formed recommendation.** Sense-check red-teamed the *emerging* conclusion. Now that the recommendation is specific, re-read sense-check's Red-Team & Pre-Mortem and Invalidation Conditions and ask whether the recommendation as now formulated survives them. If it does not, change the recommendation — not the counter-argument section.
+
+### Step 4.5: Build the Value Case (Standard §6)
+For decisions with economic, operational, or clinical value at stake, build the chain: labeled inputs → calculation → result as a range → sensitivity (reuse sense-check's Sensitivity Analysis) → implication for the decision. State what must be true for the case to work. Keep TAM / SAM / SOM / obtainable revenue separate. Expert figures stay the headline anchor where they exist (`expert-anchor-and-conflicts.md`).
+
+When credible data does not allow quantification, say what is missing and give the order of magnitude only if it can be bounded honestly. Never manufacture a point estimate.
+
+### Step 4.7: Recommendation, Execution Plan, and Decision Gates (Standard §9, §10)
+Write the recommendation against the §9 table: what · why · why not · focus (and what not to do) · how · measure · stop/change · what could change the answer. Then the execution plan by horizon (0–30 days, 30–90 days, 3–12 months, adapted to the client's time horizon) with role-based owners, KPIs split into leading and lagging, and dependencies. Then decision gates: what is validated next, go / pivot / stop thresholds (from sense-check's Invalidation Conditions and the value case's what-must-be-true conditions), and the next decision date.
+
+Owners are roles unless the client named people. Never invent names, budgets, or dates not grounded in the client's materials or labeled as assumptions.
+
 ### Step 5: Write Draft Headlines
 Write the sequence of headlines that would appear on each page of a client document. Read them in order — they should form a coherent, logical argument without any supporting text.
 
@@ -198,13 +226,20 @@ After mapping all evidence, review the storyline as an integrated argument:
 Review the storyline for any illustrative calculations, projections, or scenario models. For each:
 - Clearly distinguish between "data I found" (sourced) and "numbers I constructed to show the math" (illustrative)
 - Label every non-sourced input assumption: "Assumed for modeling purposes: [X]"
+- Apply the full label set of Standard §3 to every load-bearing claim (FACT / CALC / ESTIMATE / ASSUMPTION / HYPOTHESIS / JUDGMENT / UNKNOWN) — in particular, mark the advisor's own conclusions as JUDGMENT with their "because"
 - This distinction must carry through to the report — the client-report skill will enforce it in the quality review
 
 ## Output Format
 
 ```
 ## Governing Message
-[One sentence: the answer to the client question]
+[One sentence: the answer to the client question — a position, or the missing evidence that blocks the decision]
+
+## Options & Trade-offs
+| Criterion | Option A | Option B | Option C / Status quo |
+|-----------|----------|----------|-----------------------|
+Winner and why · why each alternative loses · conditions that would change the choice
+[Or: "Option comparison not applicable: [reason]."]
 
 ## Storyline Structure
 [Brief explanation of why this structure fits this question]
@@ -229,6 +264,29 @@ Key data point: [the anchor number or fact]
 ### Value-Add Sections (if any)
 [Insights from the research base that go beyond the Precision Anchor but materially elevate the deliverable. For each: the insight, why it's valuable, and supporting evidence.]
 
+## Value Case
+[Inputs (labeled) → calculation → range → sensitivity → implication. What must be true. Or: what is missing to quantify.]
+
+## Recommendation
+| Element | Content |
+|---------|---------|
+| What | |
+| Why | |
+| Why not (rejected options) | |
+| Focus / what not to do | |
+| How | |
+| Measure (leading / lagging KPIs) | |
+| Stop / change triggers | |
+| What could change the answer | |
+
+## Execution Plan
+| Horizon | Workstream | Action | Owner (role) | Timing | KPI / outcome | Dependency / risk |
+|---------|-----------|--------|--------------|--------|---------------|-------------------|
+
+## Decision Gates
+| Gate | What is validated | Go threshold | Pivot / stop threshold | Decision date |
+|------|-------------------|--------------|------------------------|---------------|
+
 ## Headline Sequence (read-through test)
 1. [Headline 1]
 2. [Headline 2]
@@ -239,8 +297,8 @@ Key data point: [the anchor number or fact]
 [Copy the Precision Anchor here. Then state: "The governing message answers the Precision Anchor question [DIRECTLY / PARTIALLY / WITH QUALIFICATION]." If partially or with qualification, explain the gap and what would be needed to close it.]
 
 ## Evidence Map
-| Headline | Key Evidence | Source | CS Score |
-|----------|-------------|--------|----------|
+| Headline | Key Evidence | Label | Source | CS Score |
+|----------|-------------|-------|--------|----------|
 
 ## Appendix Candidates
 [Findings that passed the Value-Add Review without qualifying — available if the client asks]

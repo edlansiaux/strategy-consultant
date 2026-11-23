@@ -30,8 +30,10 @@ If no topic is provided, prompt the user to supply one.
 
 This command invokes the **engagement-manager** skill, which orchestrates the full end-to-end workflow. The phase numbering below mirrors the orchestrator; see `skills/engagement-manager/SKILL.md` for the authoritative phase logic, gates, and state-file conventions.
 
+Every phase applies the Strategic Advisor Operating Standard (`references/strategic-advisor-standard.md`): take a position, challenge the premise, label facts vs. estimates vs. judgments, quantify with ranges and sensitivity, compare real options, end in an execution plan with decision gates. Optional domain modules (`references/domains/`) are activated for startup/venture/investment and HealthTech/MedTech engagements.
+
 ### Phase 1 — Problem Definition
-Invoke the problem-definition skill to sharpen the business question into a decision-oriented problem statement with a Precision Anchor, Client Question Checklist, and Deliverable Blueprint. **Checkpoint 1**: user confirms before proceeding.
+Invoke the problem-definition skill to sharpen the business question into a decision-oriented problem statement with a premise check, a Precision Anchor (including the Decision Frame), Client Question Checklist, and Deliverable Blueprint. engagement-manager sets the stakes tier and active domain modules. **Checkpoint 1**: user confirms before proceeding.
 
 ### Phase 2 — Hypothesis Tree (Optional)
 Invoke hypothesis-tree only when structured decomposition adds value. Skip when the question is narrow enough for direct research.
@@ -49,13 +51,13 @@ Invoke the research skill. It dispatches **two analysts in parallel** (analyst-a
 If Phase 2.5 indicated expert interviews, invoke expert-interview to plan profiles and guides, and/or process uploaded interview notes back into the research base.
 
 ### Phase 4 — Sense-Check (Mandatory)
-Invoke sense-check to pressure-test findings — triangulation, steel-man, math, precision verdict, analytical traps. **Checkpoint 3**: a DRIFTED verdict is a hard stop.
+Invoke sense-check to pressure-test findings — triangulation, steel-man, math and sensitivity, red-team and pre-mortem, invalidation conditions, precision verdict, analytical traps. **Checkpoint 3**: a DRIFTED verdict is a hard stop.
 
 ### Phase 5 — Synthesis (Mandatory)
-Invoke synthesis to produce a storyline (governing message, 2–4 key arguments, counter-argument section, headline sequence, evidence map, Precision Anchor Alignment).
+Invoke synthesis to produce a storyline (governing message that takes a position, 2–4 key arguments, options and trade-offs, value case, counter-argument section, recommendation, execution plan and decision gates, headline sequence, evidence map, Precision Anchor Alignment).
 
 ### Phase 5.5 — Storyline Critique (Mandatory)
-Dispatch the synthesis-critic agent to pressure-test the storyline against precision-anchor, validated research, and sense-check. Produces a PASS / FAIL Storyline Critique Report. **Checkpoint 4**: client-report cannot begin until critique returns PASS, or the user explicitly accepts open risks.
+Dispatch the synthesis-critic agent to pressure-test the storyline against precision-anchor, validated research, and sense-check — eight fidelity checks plus five decision-quality checks. Produces a PASS / FAIL Storyline Critique Report. **Checkpoint 4**: client-report cannot begin until critique returns PASS, or the user explicitly accepts open risks.
 
 ### Phase 6 — Deliver
 Invoke the format-appropriate delivery path: client-report skill for .docx (Executive Brief or Comprehensive), xlsx skill for Excel, pptx skill for PowerPoint. Source traceability — Research Notes section (.docx) / Sources sheet (.xlsx) / Sources appendix slide (.pptx) — is required in every format.
@@ -66,8 +68,10 @@ Dispatch the deliverable-validator agent to audit the produced deliverable again
 ## Output
 
 A validated client deliverable in the format chosen at Phase 2.7 — Word document (Executive Brief or Comprehensive), Excel workbook, or PowerPoint deck — containing:
+- An executive answer: the decision, the recommendation, and why
 - The governing message and 2–4 key arguments
 - Evidence-backed body sections following the storyline's headline sequence
-- A counter-argument section addressing the steel-man case, every client-raised objection, and every evidence-implied risk
-- Specific, sequenced recommendations
+- Options considered and why the rejected ones lose; the value case with labeled assumptions and sensitivity
+- A counter-argument section addressing the steel-man case, every client-raised objection, and every evidence-implied risk (including pre-mortem failure causes)
+- Specific, sequenced recommendations with an execution plan, KPIs, and go / pivot / stop decision gates
 - Source traceability appropriate to the format: Research Notes section (.docx), Sources sheet (.xlsx), or Sources appendix slide (.pptx) — non-negotiable in all three

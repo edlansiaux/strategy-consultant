@@ -61,8 +61,11 @@ without them.
    must echo verbatim, plus Industry Terminology and Source Material Coverage Check.
 6. **`sense-check.md`** — for the steel-man counter-narrative, Client-Raised Objections
    Inventory, Evidence-Implied Risks, and the Question-Answer Precision Verdict.
-7. **`storyline.md`** — for the governing message, headline sequence, evidence map, and the
-   Precision Anchor Alignment statement.
+7. **`storyline.md`** — for the governing message, headline sequence, evidence map, the
+   Precision Anchor Alignment statement, and (Check K) the Options & Trade-offs, Value Case,
+   Recommendation, Execution Plan, and Decision Gates sections. A storyline written before
+   v1.6.0 has none of these sections: run Check K against the storyline's recommendations
+   only and note "legacy storyline" in the report.
 
 ## Process
 
@@ -131,13 +134,20 @@ data as a precise answer (without qualification), FAIL.
 
 **Check G — Banned language.**
 Scan the deliverable for every term in `skills/client-report/references/banned-language.md`.
-For each match: FAIL and list the offending phrase with its surrounding sentence.
+For each match: FAIL and list the offending phrase with its surrounding sentence. Apply the
+file's "Domain-term exceptions" section literally: a match that meets an exception's stated
+condition is not a FAIL; note it as "exception applied".
 
-**Check H — Assumption labeling.**
+**Check H — Assumption and epistemic labeling.**
 Identify any illustrative numbers, scenario projections, or constructed estimates in the
 deliverable. Each must be visually distinct from sourced data and labeled (e.g.,
 "For illustrative purposes, assuming...", italics, callout box). If any constructed number
 is presented with the same confidence framing as a sourced number, FAIL.
+Extend the scan to the full label set of `references/strategic-advisor-standard.md` §3 (plugin
+root): FAIL if an advisor judgment is phrased as an established fact, if a calculation or
+estimate carries more precision than its inputs, if TAM / SAM / SOM / obtainable revenue are
+conflated, or if source-backed wording ("data shows", "research confirms") has no Research
+Notes entry.
 
 **Check I — Expert-anchor / strategic conflict.**
 If `research-validated.md` flagged STRATEGIC CONFLICTS (expert recommendation vs. public-data
@@ -152,6 +162,23 @@ or metric-based ranking that contradicts expert guidance, FAIL.
 - For .xlsx: the Sources sheet exists and has at least one cited reference per matrix
   category.
 - For .pptx: the Sources appendix slide exists.
+
+**Check K — Recommendation and execution carry-forward.**
+Compare the deliverable against `storyline.md`'s Governing Message, Options & Trade-offs,
+Value Case, Recommendation, Execution Plan, and Decision Gates sections. Verify:
+1. The executive summary (or first sheet / first content slide) states the decision and the
+   recommendation — or, if the storyline withheld one, the missing evidence and the decision
+   it blocks.
+2. Rejected options and why they lose appear (or the storyline's "not applicable" sentence).
+3. The value case appears with its labeled assumptions and sensitivity, when the storyline has one.
+4. The execution plan appears with horizons, role-based owners, KPIs, and dependencies — and
+   contains no named owner, budget, or date absent from the storyline.
+5. Decision gates appear with go / pivot / stop thresholds, plus "what could change this
+   recommendation".
+6. Every element in the deliverable-validator row of any domain module listed on the Precision
+   Anchor's `Domain modules:` line is present.
+FAIL and list each missing element. For .xlsx / .pptx, the elements may sit on dedicated
+sheets/slides; their absence fails the same way.
 
 ### Step 3: Produce the Deliverable Gap Report
 
@@ -176,9 +203,10 @@ Date: <ISO timestamp>
 | E. Headline-to-section fidelity | PASS/FAIL | Reorder/drops listed below |
 | F. Altitude qualification | PASS/FAIL | Unqualified mismatches listed below |
 | G. Banned language | PASS/FAIL | Offending phrases listed below |
-| H. Assumption labeling | PASS/FAIL | Unlabeled illustrative numbers listed below |
+| H. Assumption and epistemic labeling | PASS/FAIL | Unlabeled or mislabeled claims listed below |
 | I. Expert-anchor / strategic conflict | PASS/FAIL | Reversed rankings listed below |
 | J. Format-specific | PASS/FAIL | Constraint violations listed below |
+| K. Recommendation and execution carry-forward | PASS/FAIL | Missing decision elements listed below |
 
 ## Gaps (one section per failed check)
 ### <Check letter and name>

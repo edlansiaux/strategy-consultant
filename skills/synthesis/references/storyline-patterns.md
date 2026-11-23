@@ -88,3 +88,7 @@ Regardless of pattern, every storyline must pass these tests:
 3. **Counter-argument test**: Is the most obvious objection addressed?
 4. **Evidence test**: Is every major claim supported by sourced evidence?
 5. **"So what" test**: Does every section connect to the client's decision?
+6. **Position test**: Does the storyline choose — and say why the alternatives lose? (`references/strategic-advisor-standard.md` §7, §9 at the plugin root)
+7. **Execution test**: Does it end in a sequenced plan with KPIs and go / pivot / stop gates? (§10)
+
+Whatever pattern is chosen, the Options & Trade-offs, Value Case, Recommendation, Execution Plan, and Decision Gates sections of the synthesis output are produced alongside it — the pattern governs the order of argument, not whether those sections exist.

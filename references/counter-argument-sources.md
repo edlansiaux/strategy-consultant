@@ -10,7 +10,7 @@ A counter-argument section that draws from only the analyst's own reasoning will
 
 2. **Client-Raised Objections Inventory.** Every concern, hesitation, objection, or risk the client raised — in their call, brief, messages, or any source material. Extracted systematically in `sense-check` Step 3 Part B. Logged as a numbered table with source location, addressed-status, and action needed. **Client-raised concerns that go unaddressed in the deliverable are a credibility risk — the client will notice their own question was not answered.** Do not skip "minor" concerns; address them briefly rather than ignoring them.
 
-3. **Evidence-Implied Risks.** Risks, threats, or caveats the client did NOT raise but that the evidence itself surfaces. Extracted in `sense-check` Step 3 Part C. Examples: phased deployment implies operational complexity; sales-team-needed implies a staffing prerequisite; third-party-adoption-dependent implies an external dependency.
+3. **Evidence-Implied Risks.** Risks, threats, or caveats the client did NOT raise but that the evidence itself surfaces. Extracted in `sense-check` Step 3 Part C. Examples: phased deployment implies operational complexity; sales-team-needed implies a staffing prerequisite; third-party-adoption-dependent implies an external dependency. The red-team / pre-mortem in `sense-check` Step 6.5 (`strategic-advisor-standard.md` §8) feeds this table: every pre-mortem failure cause and actor objection not already listed is added here, so it is carried forward by the same checks.
 
 ## Format for the counter-argument section in the deliverable
 

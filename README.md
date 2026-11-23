@@ -28,12 +28,25 @@ This plugin is designed to handle 80–90% of the analytical workload in a strat
 
 This plugin runs a complete consulting-grade analytical workflow:
 
-1. **Define the problem** — Sharpens a vague business challenge into a decision-oriented question with clear scope
-2. **Structure hypotheses** (optional) — Builds a testable hypothesis tree when the problem benefits from structured decomposition
-3. **Research** — Deploys two independent research agents in parallel, then validates findings with a third agent for consistency and source quality
-4. **Sense-check** — Pressure-tests all findings through triangulation, steel-manning the counter-argument, math checks, and bias scanning
-5. **Synthesize** — Builds a storyline that directly answers the client question, organized by the logic of the answer (not a rigid framework)
-6. **Deliver** — Produces an executive-grade Word document with clear language, sourced claims, and zero consulting clichés
+1. **Define the problem** — Challenges the premise, separates symptoms from causes, and sharpens a vague business challenge into a decision frame (decision owner, value at stake, baseline, constraints, options, success criteria)
+2. **Structure hypotheses** (optional) — Builds a decision-relevant, testable hypothesis tree when the problem benefits from structured decomposition
+3. **Research** — Deploys two independent research agents in parallel (with mandatory disconfirmation and quantitative triangulation), then validates findings with a third agent for consistency, source quality, and evidence balance
+4. **Sense-check** — Pressure-tests all findings through triangulation, steel-manning, math and sensitivity checks, red-team and pre-mortem, and bias scanning
+5. **Synthesize** — Builds a storyline that takes a position: options and trade-offs, value case, recommendation, execution plan, and decision gates
+6. **Deliver** — Produces an executive-grade deliverable with the decision up front, sourced claims, labeled estimates, and zero consulting clichés
+
+## Strategic Advisor Operating Standard
+
+`references/strategic-advisor-standard.md` is the cross-phase quality bar: take a position, challenge the premise, label every claim (fact / calculation / estimate / assumption / hypothesis / judgment / unknown), quantify with ranges and sensitivity, compare genuinely distinct options including the status quo, red-team the conclusion, and finish with a concrete execution plan and go / pivot / stop gates. Depth scales with a stakes tier (`tactical` / `strategic` / `high-stakes`) recorded at Phase 1 — without ever removing a phase or gate. Reasoning quality takes precedence over the number of frameworks used.
+
+**Domain modules** (activated automatically at Phase 1 and confirmed by the user):
+
+| Module | File | For |
+|--------|------|-----|
+| `startup-venture` | `references/domains/startup-venture.md` | Startups, business plans, fundraising, investment decisions |
+| `healthtech-medtech` | `references/domains/healthtech-medtech.md` | Healthcare, medical devices, digital health, clinical AI |
+
+Each module has a Phase hooks table telling every skill and agent what to do differently.
 
 ## Commands
 
@@ -69,8 +82,8 @@ This plugin runs a complete consulting-grade analytical workflow:
 | **analyst-bravo** | Independent research thread B — complementary angle (competitive dynamics, case studies, contrarian evidence) |
 | **analyst-deep** | Optional third research pass targeting under-explored sub-dimensions identified after the first two analysts |
 | **research-validator** | Phase 3 — cross-checks analyst memos for consistency, CS scoring, and Precision Anchor alignment (analyst-memo scope only) |
-| **synthesis-critic** | Phase 5.5 — independent critique of the storyline against precision-anchor, validated research, and sense-check |
-| **deliverable-validator** | Phase 6.5 — audits the final deliverable (.docx / .xlsx / .pptx) against all upstream artifacts and produces a Deliverable Gap Report |
+| **synthesis-critic** | Phase 5.5 — independent critique of the storyline: 8 fidelity checks against precision-anchor, validated research, and sense-check, plus 5 decision-quality checks (recommendation, options, value case, execution and gates, decision-critical gaps) |
+| **deliverable-validator** | Phase 6.5 — audits the final deliverable (.docx / .xlsx / .pptx) against all upstream artifacts, including recommendation and execution carry-forward, and produces a Deliverable Gap Report |
 
 ## Connectors (Optional)
 
@@ -79,6 +92,8 @@ This plugin works without any external integrations. See `CONNECTORS.md` for opt
 ## Design Principles
 
 - **Delivery mode only** — produces outputs directly, no Socratic coaching
+- **Decision-first** — takes a position, ranks options, and states what would change the answer
+- **Calibrated** — facts, calculations, estimates, assumptions, and judgments are labeled; ranges over false precision
 - **Evidence-traced** — every claim in the final report traces back to a sourced finding
 - **Bias-resistant** — two independent research threads + validation reduces confirmation bias
 - **No forced frameworks** — the storyline structure follows the logic of the answer

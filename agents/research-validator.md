@@ -69,6 +69,8 @@ For each major finding, verify the analyst's assigned CS score is correct per th
 
 If an analyst assigned a score that is too generous for the source type, downgrade it. If a critical claim rests on CS-3 or CS-4 sources only, flag it as a gap requiring better sourcing — do not let it pass into synthesis unchallenged.
 
+Alongside the CS score, check the context qualifiers for each decision-critical claim (as-of date, geography, metric definition/scope, method/sample, independence — `references/strategic-advisor-standard.md` §4 at the plugin root). A CS-1 source whose geography, period, or definition does not match the Precision Anchor scope is flagged as an altitude/context mismatch, not counted as strong direct evidence. Verify each finding's epistemic label (§3): an ESTIMATE or JUDGMENT tagged as FACT is relabeled and noted in Source Quality Issues.
+
 ### Step 4: Spot-Check Critical Claims
 Select the 3-5 most important claims that the storyline will depend on. For each:
 - Search independently to find a third source that corroborates or contradicts
@@ -127,6 +129,14 @@ Re-read the Precision Anchor from the research brief. For every consolidated fin
 
 If the available data cannot directly answer the Precision Anchor question, state this explicitly in the Validation Summary with: (a) what the data CAN answer, (b) why the direct question cannot be answered with public data, and (c) what additional data (client data, expert interviews) would be needed to close the gap.
 
+### Step 6.5: Evidence Balance and Option Coverage
+Standard §4 and §6 require disconfirmation and triangulation; this step verifies they happened.
+- **Balance**: For each decision-critical branch (hypothesis-tree branch or Precision Anchor sub-question), count supporting vs. undermining findings across all memos. A branch with zero undermining findings and no documented search trail for counter-evidence is flagged `ONE-SIDED` and listed in Remaining Gaps as closeable with public research.
+- **Option coverage**: For each option in the Decision Frame (including status quo), record whether decision-relevant evidence exists. An option with materially less evidence than the others is flagged — a comparison cannot be fair if one side was not researched.
+- **Triangulation**: For each decision-driving number, record whether bottom-up and top-down bases exist and whether they agree. Unexplained divergence is listed in Contradictions Found.
+- **Change-the-answer evidence**: State whether the "evidence that would change the answer" from the Decision Frame was found, not found, or not searched.
+- **Domain modules**: Apply the research-validator row of any active module's Phase hooks.
+
 ### Step 7: Gap Assessment
 Compile a unified list of information gaps from both analysts. Categorize each gap:
 - **Closeable with public research**: suggest specific search strategies
@@ -146,8 +156,8 @@ Compile a unified list of information gaps from both analysts. Categorize each g
 ## Consolidated Findings
 [Merged list of validated findings from both analysts, deduplicated, with unified CS scores]
 
-| # | Finding | Sources (combined) | CS Score | Alignment | Corroborated? | Notes |
-|---|---------|-------------------|----------|-----------|---------------|-------|
+| # | Finding | Label | Sources (combined) | CS Score | Alignment | Corroborated? | Notes |
+|---|---------|-------|-------------------|----------|-----------|---------------|-------|
 [Alignment = DIRECT / SUPPORTING / ADJACENT per Precision Alignment Check]
 
 ## Contradictions Found
@@ -159,7 +169,19 @@ Compile a unified list of information gaps from both analysts. Categorize each g
 [- Recommend which source to use as the primary, and why. Never silently discard one side — both must be visible.]
 
 ## Source Quality Issues
-[Any findings that rest on weak sources and need stronger evidence]
+[Any findings that rest on weak sources and need stronger evidence; context mismatches; relabeled findings]
+
+## Evidence Balance & Option Coverage
+| Branch / sub-question | Supporting | Undermining | Status (BALANCED / ONE-SIDED) |
+|-----------------------|-----------|-------------|-------------------------------|
+
+| Option (incl. status quo) | Evidence available | Coverage (ADEQUATE / THIN / NONE) |
+|---------------------------|-------------------|-----------------------------------|
+
+| Decision-driving number | Bottom-up | Top-down | Agreement |
+|-------------------------|-----------|----------|-----------|
+
+Change-the-answer evidence: [FOUND — summary / NOT FOUND after search / NOT SEARCHED]
 
 ## Remaining Gaps
 | Gap | Type | How to Close |

@@ -34,6 +34,8 @@ Source priority (Internal data > Expert interviews > Public research), conflict-
 
 The five scenarios (A/B/C/D/E) and which evidence tiers each engagement runs against are specified in `../../references/data-source-inquiry.md` (at the plugin root). The active scenario is recorded in `engagement-state.json.scenario` after Phase 2.5 completes.
 
+Evidence discipline (primary sources first, context qualifiers alongside CS scores, mandatory disconfirmation, discrepancy handling, analyst independence), epistemic labels, and quantification rules are specified in `../../references/strategic-advisor-standard.md` §3, §4, §6. If the Precision Anchor lists domain modules, apply the research row of each module's Phase hooks table (`../../references/domains/`).
+
 What this skill does with the hierarchy:
 - Reads `engagement-state.json` to determine the scenario and `step0-answers.md` for tier-specific details.
 - Builds a research brief that gives analysts the scenario-appropriate framing (Step 1 below).
@@ -129,6 +131,12 @@ Before dispatching agents, write a clear research brief that includes:
 - **Industry terminology instruction to analysts**: "As part of your research, identify and collect the standard industry-specific terminology, jargon, and technical vocabulary used by practitioners in this domain. Record these terms with brief definitions in a dedicated 'Industry Terminology' section of your output. These terms will be used in the report alongside plain-language explanations."
 - **Outcome data instruction to analysts**: "For every competitor or case study example, capture both the mechanism (what they do) and the measurable outcome (what results it produced — revenue, conversion, adoption rate, cost reduction, engagement metrics). A competitor example without a quantified outcome is incomplete. If no outcome data is publicly available, note this explicitly rather than silently omitting it."
 - **Source traceability instruction to analysts**: "Every factual claim must include: (a) the source name, (b) a working URL or the marker [NO URL]. When you derive an estimate from adjacent data, label it [ESTIMATE] and state the source and bridging assumption in one sentence. Never present an estimate with the same confidence framing as a directly sourced fact."
+- **Decision Frame** (from the Precision Anchor): options in scope (including status quo), baseline, value at stake, and "evidence that would change the answer". Instruction to analysts: "Collect decision-relevant evidence on every option in scope that falls within your angle — including the status quo — not only on the favored option. Search explicitly for the evidence listed under 'evidence that would change the answer'."
+- **Disconfirmation instruction to analysts**: "At least a quarter of your queries must be designed to find evidence against the leading hypothesis, failure cases, or competing explanations. Record undermining evidence with the same rigor as supporting evidence. A memo with no undermining evidence on a decision-critical branch is incomplete."
+- **Context-qualifier instruction to analysts**: "For every decision-critical claim, record as-of date, geography, metric definition/scope, method or sample where relevant, and independence/conflict of interest alongside the CS score. Flag claims whose context does not match the Precision Anchor scope."
+- **Quantification instruction to analysts**: "Where a number drives the decision (market size, price, cost, adoption, margin), seek both a bottom-up and a top-down basis and report both, with the gap between them. Keep TAM, SAM, SOM, and obtainable revenue separate. Label each number per the epistemic labels (FACT/CALC/ESTIMATE/ASSUMPTION)."
+- **Independence instruction to analysts**: "Do not read the other analyst's memo or any research-*.md file other than your own. Work only from this brief."
+- **Domain-module instructions** (if any module is active): the research row of the module's Phase hooks table, verbatim, plus the module file path so the analyst can read it.
 
 ### Step 2: Generate Differentiated Research Angles (DYNAMIC — do not use fixed categories)
 
@@ -137,6 +145,8 @@ Before dispatching agents, analyze the Precision Anchor, hypothesis branches, an
 1. **Distinct**: Each angle covers meaningfully different territory — different source types, different sub-questions, or different analytical lenses. If the two angles would lead to the same first 5 Google searches, they are not distinct enough.
 2. **Relevant**: Both angles directly serve the Precision Anchor. Do not assign an angle just because it sounds rigorous — it must help answer the actual question.
 3. **Comprehensive together**: The union of both angles should cover the full evidence surface the question demands. No critical sub-question should fall outside both angles.
+4. **Option-complete**: Every option in the Decision Frame — including status quo — is covered by at least one angle. Disconfirmation is the duty of both analysts, not only of analyst-bravo.
+5. **Domain-complete**: If one or more domain modules are active, their research-row angle seeds are inputs to this clustering, not additional angles. With two modules active, merge all seeds into the two angles (the healthcare module governs value, evidence, regulatory, and adoption threads; the startup module governs venture economics and capital threads). If the merged scope is too wide for two analysts to cover in depth, say so in the brief and flag the uncovered threads for the Step 5.3 deep-dive assessment.
 
 **How to generate angles:**
 - Read the Precision Anchor and hypothesis branches
@@ -208,6 +218,10 @@ After the validator completes, present the user with:
    - **Granularity of process/mechanism**: Where the first pass identified that a process, approval, or mechanism exists, did it capture the operational specifics — who is involved, what system/channel is used, what the timeline and cost are, and what the requirements for compliance or participation look like?
    - **Outcome data**: For every example, case study, or benchmark cited, is there quantified outcome data (revenue impact, adoption rate, cost, timeline) — or only descriptions of what was done without measuring what it achieved?
 
+   - **Decision-critical uncertainty**: Is the "evidence that would change the answer" from the Decision Frame still unresolved? Is any option in scope supported by materially less evidence than the others? Is any decision-driving number backed by only one of bottom-up / top-down?
+
+   When `engagement-state.json.stakes_tier` is `high-stakes`, state that the deep dive is recommended unless none of the gaps above is decision-critical, and say why.
+
 3. **An explicit question to the user**: "I've identified [N] sub-dimensions that could benefit from deeper research. Would you like me to dispatch a third research agent to investigate these specifically? This will add depth but also time to the engagement."
 
 **If the user confirms**, dispatch the **analyst-deep** agent with:
@@ -254,6 +268,7 @@ After validation, compile the final research output that includes:
 - Client data analysis (if applicable)
 - Expert input synthesis (if applicable)
 - A unified information gap assessment
+- The validator's Evidence Balance & Option Coverage section (supporting vs. undermining evidence per decision-critical branch; evidence per option; bottom-up vs. top-down status of decision-driving numbers)
 - Recommendations for what private information (client data, expert interviews) would strengthen the evidence base
 
 ## Handling Information Boundaries

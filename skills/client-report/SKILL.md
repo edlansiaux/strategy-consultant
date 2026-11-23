@@ -40,6 +40,8 @@ At the end of this phase, after the .docx (or .xlsx / .pptx) is produced, append
 - `../../references/expert-anchor-and-conflicts.md` — expert-anchor rule and strategic conflict handling enforced by Checks 5d and 5e.
 - `../../references/research-notes-and-traceability.md` — Source Registry format, CS filtering, and the hard-gate count match enforced by Check 5i. Read this before writing the Research Notes section.
 - `references/banned-language.md` — banned words/phrases scanned by Check 5b.
+- `../../references/strategic-advisor-standard.md` — §3 (epistemic labels, enforced by 5n), §9 (recommendation quality bar, enforced by 5m), §10 (execution plan and decision gates), §12 (communication discipline).
+- `../../references/domains/*.md` — if the Precision Anchor lists domain modules, include the deliverable elements in the client-report row of each module's Phase hooks.
 
 These references are the source of truth. The standards and quality checks below are the phase-specific actions; they reference the doctrine without re-explaining it.
 
@@ -53,21 +55,7 @@ These references are the source of truth. The standards and quality checks below
 - Use numbers with context ("revenue grew 8%, outpacing the market's 5% average")
 - Write for a time-pressed executive who will skim before reading
 
-**Do NOT use any of the following — they are banned from this deliverable:**
-- "Leverage" (say "use")
-- "Synergies" (say what actually improves and by how much)
-- "Unlock value" (say what value, how much, and how)
-- "Best-in-class" (say who, specifically, and what they do)
-- "Holistic" (say what is included)
-- "Ecosystem" (unless literally about biology)
-- "Paradigm shift" (describe what actually changed)
-- "Move the needle" (say by how much and on what metric)
-- "Low-hanging fruit" (describe the specific opportunity)
-- "Deep dive" (say "detailed analysis")
-- "Going forward" (say the specific time period)
-- "At the end of the day" (delete it)
-- "Thought leadership" (delete it)
-- Any phrase that sounds important but communicates nothing specific
+**Do NOT use banned language.** The complete list of banned words, phrases, and sentence structures — with replacements and the narrow domain-term exceptions — is `references/banned-language.md`. It is the single source of truth, scanned by Check 5b here and by deliverable-validator Check G. Beyond the list: no phrase that sounds important but communicates nothing specific.
 
 ### Tone
 Executive, not academic. Direct, not hedging. Confident where the evidence supports confidence. Transparent about uncertainty where it exists. The reader should feel they are getting the unvarnished truth from a trusted advisor, not a sales pitch.
@@ -75,8 +63,23 @@ Executive, not academic. Direct, not hedging. Confident where the evidence suppo
 ### Precision
 - Every number needs a source, a date, and context
 - Ranges are more honest than false point estimates ("$2-3B" not "$2.47B")
-- Distinguish between facts, estimates, and assumptions explicitly
+- Distinguish between facts, calculations, estimates, assumptions, and judgments explicitly (Standard §3)
 - "We believe" is fine when followed by "because [evidence]" — but never as a substitute for evidence
+
+## Executive Output Contract
+
+Whatever the mode, the deliverable carries the decision, in this logical order (the section order follows the storyline; the contract defines what must be present, not a template):
+
+1. **Executive answer** — the decision, the recommendation (or the evidence blocking it), and why. First thing the reader sees.
+2. **Decision framing** — question, scope, baseline, constraints, decision success criteria (compact; a box or short paragraph).
+3. **Key insights** — the storyline arguments, each with evidence and implication.
+4. **Options and trade-offs** — the synthesis comparison, including why rejected options lose (or the one-line "not applicable" statement).
+5. **Value case** — labeled assumptions, range, sensitivity (when the storyline has one).
+6. **Counter-arguments and risks** — the three tributaries, with mitigations and leading indicators.
+7. **Recommendation, execution plan, decision gates** — what to do, by horizon, with roles, KPIs, dependencies, go / pivot / stop thresholds, and what could change the answer.
+8. **Appendix and Research Notes.**
+
+The storyline remains authoritative for section order and headlines; this contract only ensures none of the decision elements produced by synthesis is lost in delivery.
 
 ## Document Structure
 
@@ -85,10 +88,12 @@ Use the docx skill to create the document. The structure should follow the story
 **Executive Brief Mode (4-6 pages — this is the default when confirmed in Phase 2.7):**
 When the user selected the executive brief format, enforce these constraints strictly:
 - Total body content: 4-6 pages maximum (excluding title page and Research Notes). This is a hard limit, not a target.
-- Executive summary: 1 paragraph (3-5 sentences), not half a page
+- Executive summary: 1 paragraph (3-5 sentences), not half a page — sentence 1 states the recommendation (or what blocks it); the remaining sentences give the why, the main rejected alternative, and the first decision gate
 - Body sections: Use bullet points as the primary format. Each bullet = one finding + its implication. Full prose paragraphs only for the governing message and counter-argument section.
 - Tables: Maximum 1 table per section, kept compact (no more than 5 rows)
 - Recommendations: Numbered, 1-2 sentences each, no extended justification (the body already provides it)
+- Options: one compact comparison table (≤5 rows) or 2-3 bullets on why rejected options lose
+- Execution & gates: one compact table (≤5 rows, grouped by horizon) plus the go / pivot / stop thresholds; the full execution plan goes to the appendix if it does not fit
 - Research Notes: MANDATORY — condensed to include only sources directly cited in the body, but must be present. No executive brief is complete without source traceability.
 - If the content cannot fit in 6 pages, move the least critical findings to a 1-page appendix rather than expanding the body. Prioritize ruthlessly.
 
@@ -97,7 +102,7 @@ Most reports will include:
 
 ### Front Matter
 - **Title page**: Client name, engagement title, date, confidentiality notice
-- **Executive summary**: The governing message and 2-4 key arguments in ~half a page. A senior executive who reads only this page should understand the recommendation and its basis.
+- **Executive summary**: The governing message, the recommendation, and 2-4 key arguments in ~half a page, plus the main rejected alternative and the first decision gate. A senior executive who reads only this page should understand the recommendation, its basis, and what would make it change.
 
 ### Body
 Organized by the storyline headlines from the synthesis phase. Each section should:
@@ -132,12 +137,19 @@ A thorough, honest section addressing risks and objections. This builds credibil
 
 For each counter-argument, structure as: "The risk is [X]. We considered this carefully. The evidence suggests [Y], and we recommend [mitigation Z] as a safeguard."
 
+### Options Considered
+The synthesis option comparison: criteria, how each option scores, why the recommended option wins, why each credible alternative loses, and the conditions that would reverse the choice. Omit only if the storyline recorded "Option comparison not applicable" — then keep that one sentence in the decision framing.
+
 ### Recommendations
 Specific, actionable, and sequenced. Each recommendation should answer:
-- What to do (specific action)
+- What to do (specific action) — and what not to do
 - By when (timeline)
-- What it requires (resources, investment, organizational changes)
+- What it requires (resources, investment, organizational changes, dependencies)
 - What it delivers (expected impact, with honest ranges)
+- Who (role) owns it and which KPI shows it is working
+
+### Execution Plan and Decision Gates
+The synthesis execution table by horizon and the decision gates (what is validated next, go / pivot / stop thresholds, next decision date), followed by **What could change this recommendation** — the decision-critical uncertainties and invalidation conditions.
 
 ### Appendix (if needed)
 Supporting data, detailed methodology, secondary findings that did not make the main storyline but may be useful if the client asks.
@@ -168,8 +180,8 @@ Follow the headline sequence from synthesis. For each section:
 - Include one table or data exhibit per section where helpful
 - End with a clear "so what" that connects to the next section
 
-### Step 4: Write the Recommendations
-Make them specific and sequenced. Number them. Include expected impact ranges and timelines.
+### Step 4: Write the Recommendations, Execution Plan, and Decision Gates
+Make them specific and sequenced. Number them. Include expected impact ranges and timelines. Transcribe the execution plan and decision gates from the storyline; do not invent owners, budgets, or dates that the storyline did not ground or label.
 
 ### Step 5: Quality Review
 Before producing the final document, run every check below. These are not suggestions — each is a mandatory pass.
@@ -280,6 +292,26 @@ Retrieve the Source Material Extraction Log from the research phase. Verify that
 
 **5l. Altitude audit:**
 For each section of the report, compare the data presented against the corresponding Precision Anchor sub-question. If the data is at a higher level of aggregation than what the client asked for, the section must include an explicit qualification: what the data shows, what the client asked for, and how to close the gap. A report that presents network totals as the answer to a per-store question — without flagging this — fails the altitude audit.
+
+**5m. Recommendation completeness check (MANDATORY):**
+Compare the report against the storyline's Recommendation, Options & Trade-offs, Execution Plan, and Decision Gates sections, and against Standard §9. Verify the report states:
+- [ ] What (the chosen course) — in the executive summary
+- [ ] Why — evidence and causal logic
+- [ ] Why not — each credible rejected option and its losing trade-off (or the "not applicable" sentence)
+- [ ] Focus — 1–3 priorities and what not to do
+- [ ] How — sequence, resources, dependencies
+- [ ] Measure — KPIs, leading vs. lagging
+- [ ] Stop / change — go / pivot / stop thresholds
+- [ ] What could change the answer — invalidation conditions
+- [ ] The deliverable elements required by any active domain module
+If the storyline withheld a recommendation, verify the report says so up front and names the missing evidence and the decision it blocks. Any unchecked item → add it or record why it does not apply.
+
+**5n. Epistemic labeling and precision check (MANDATORY):**
+Extends 5d/5e to the full label set of Standard §3. For every number and every conclusion in the executive summary, headlines, options table, value case, and recommendations, the reader must be able to tell whether it is a sourced fact, a calculation on sourced inputs, an estimate, an assumption, or the advisor's judgment. Verify:
+- [ ] No judgment is phrased as a fact (judgments carry "we judge / we recommend … because …")
+- [ ] No estimate or calculation is presented with more precision than its inputs (ranges where inputs are uncertain)
+- [ ] TAM, SAM, SOM, and obtainable revenue are not conflated
+- [ ] No source-backed wording ("data shows", "research confirms") without a Research Notes entry
 
 ### Step 6: Produce the .docx
 Use the docx skill to create a professionally formatted Word document with:

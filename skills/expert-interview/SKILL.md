@@ -120,6 +120,9 @@ Q2: [Question]
 VALIDATION SECTION (5-10 minutes)
 [Present 2-3 specific findings from the public research and ask the expert to confirm, challenge, or nuance them. Frame as: "Our research suggests [X]. Does that align with your experience? What would you adjust?"]
 
+CHALLENGE SECTION (3-5 minutes)
+[At least one question designed to disconfirm the leading hypothesis or the favored option, and one on the "evidence that would change the answer" from the Precision Anchor's Decision Frame. Frame neutrally: "What would make [option] fail?" / "Where have you seen this not work?" / "What would you need to see before committing?"]
+
 CLOSING (2-3 minutes)
 - "What haven't I asked about that you think is important for this question?"
 - "Who else would you recommend we speak with?"
@@ -149,6 +152,8 @@ Read the interview notes in full. For every substantive claim the expert makes, 
     Context: [What prompted this claim — the question asked or topic discussed]
     Type: [FACT — based on the expert's direct experience / OPINION — the expert's judgment or prediction / HEARSAY — something the expert heard but did not directly experience]
 ```
+
+Type maps to the plugin's epistemic labels (`../../references/strategic-advisor-standard.md` §3): FACT → FACT (expert-sourced); OPINION → JUDGMENT (the expert's, attributed); HEARSAY → HYPOTHESIS until corroborated. If a domain module is active, also apply the expert-interview row of its Phase hooks (e.g. stakeholder-role coverage).
 
 Separate facts from opinions rigorously. An expert saying "we saw 15% cost reduction when we switched suppliers" is a FACT (their direct experience). An expert saying "I think the market will grow 20%" is an OPINION. An expert saying "I heard Company X is planning to enter" is HEARSAY.
 

@@ -11,10 +11,31 @@ Orchestrate a complete consulting-grade analytical engagement. This skill coordi
 ## Operating Mode
 Delivery only. Produce results directly. Flag weak logic inline rather than asking Socratic questions. The user wants outputs, not coaching.
 
+Delivery mode is not deference. Challenge the premise, call out weak ideas directly and constructively, and take a position — inline, with reasoning — per the Strategic Advisor Operating Standard below.
+
+## Strategic Advisor Operating Standard (top-level quality bar)
+
+The canonical standard is `references/strategic-advisor-standard.md`. It is the quality bar for every phase: posture (§1), decision frame (§2), epistemic labels (§3), evidence discipline (§4), problem solving and framework selection (§5), value case (§6), options (§7), red team and pre-mortem (§8), recommendation bar (§9), execution and decision gates (§10), depth calibration (§11), communication (§12), domain modules (§13). Read it once at the start of the engagement. Each skill links to the sections it applies; this orchestrator does not restate them.
+
+The orchestrator owns four questions. They must have an answer (or a labeled assumption) in the Precision Anchor before Checkpoint 1 closes, and they are re-asked at every checkpoint:
+1. **What decision must be made, and by whom?**
+2. **What value is at stake?** (order of magnitude, as a range)
+3. **What constraints matter?**
+4. **What evidence would change the recommendation?**
+
+**Depth calibration.** At the end of Phase 1, classify the engagement as `tactical`, `strategic` (default), or `high-stakes` per §11 and record it in `engagement-state.json.stakes_tier`. The tier scales depth *inside* phases (number of options, sensitivity drivers, pre-mortem breadth, deep-dive recommendation). It never removes a phase, checkpoint, or gate. Do not force every framework into every engagement; the tier and the decision decide what analysis is needed.
+
+**Domain modules.** At the end of Phase 1, activate any domain module whose trigger matches the engagement (§13): `references/domains/startup-venture.md`, `references/domains/healthtech-medtech.md`. Both may be active. Record them in `engagement-state.json.domain_modules` and on the `Domain modules:` line of the Precision Anchor, and confirm them with the user at Checkpoint 1. Every downstream skill and agent reads the module's **Phase hooks** table and applies its row. If no module applies, record `[]`.
+
+**Simple questions.** If the request is a simple factual or tactical question that does not need a full engagement, say so in one line and offer a direct answer instead of opening a workspace. If the user still wants the engagement, run it.
+
 ## Shared references (read once; linked from every phase)
 
 Several rules apply across multiple phases. To avoid drift, the canonical specifications live at the plugin root and every skill links to them rather than re-explaining the doctrine:
 
+- `references/strategic-advisor-standard.md` — the cross-phase quality bar (decision frame, epistemic labels, evidence discipline, value case, options, red team / pre-mortem, recommendation bar, execution and decision gates, stakes calibration, domain modules).
+- `references/domains/startup-venture.md` — optional domain module (startups, business plans, fundraising, investment decisions). Loaded only when active.
+- `references/domains/healthtech-medtech.md` — optional domain module (healthcare, MedTech, digital health, clinical AI). Loaded only when active.
 - `references/data-source-inquiry.md` — the three required questions, scenario classification, where each tier is processed.
 - `references/altitude-and-precision.md` — altitude rules, the precision verdict, Coverage Dimensions check.
 - `references/counter-argument-sources.md` — the three tributaries (steel-man, client-raised objections, evidence-implied risks) and the structured counter-argument format.
@@ -79,6 +100,7 @@ Inside the workspace, the file layout is:
     "sense-check"
   ],
   "artifact_paths": {
+    "hypothesis_tree": null,
     "precision_anchor": "./engagements/europe-ev-charging-2026-05-03/precision-anchor.md",
     "client_question_checklist": "./engagements/europe-ev-charging-2026-05-03/client-question-checklist.md",
     "source_material_extraction_log": "./engagements/europe-ev-charging-2026-05-03/source-material-extraction-log.md",
@@ -100,6 +122,8 @@ Inside the workspace, the file layout is:
   "next_required_action": "Run synthesis skill — produce storyline.md against precision-anchor.md, research-validated.md, and sense-check.md.",
   "deliverable_format": "executive-brief-docx",
   "scenario": "C",
+  "stakes_tier": "strategic",
+  "domain_modules": [],
   "created_at": "2026-05-03T09:14:22Z",
   "last_updated": "2026-05-04T11:08:51Z"
 }
@@ -116,6 +140,9 @@ Field semantics:
 - `next_required_action` — a one-sentence human-readable description of what the next skill must do. This is what the resume flow shows the user.
 - `deliverable_format` — recorded once Phase 2.7 confirms the format. Used by client-report.
 - `scenario` — `A`/`B`/`C`/`D`/`E` per the data-source-inquiry scenarios.
+- `stakes_tier` — `tactical` / `strategic` / `high-stakes`, set at the end of Phase 1 (see Strategic Advisor Operating Standard §11). Optional for backward compatibility: when absent (state files written before v1.6.0, or reconstructed state), treat as `strategic`.
+- `domain_modules` — list of active domain-module ids (`startup-venture`, `healthtech-medtech`), set at the end of Phase 1. Optional for backward compatibility: when absent, read the Precision Anchor's `Domain modules:` line; if that is also absent, treat as `[]` and re-assess at the next checkpoint.
+- `artifact_paths.hypothesis_tree` — path to `hypothesis-tree.md` when Phase 2 ran; `null` otherwise. Optional key.
 - `created_at` / `last_updated` — ISO 8601 UTC timestamps.
 
 ### Resume behavior (mandatory at the start of every `/engagement` invocation)
@@ -146,7 +173,9 @@ Do not scatter phase outputs across the user's working directory, and do not cre
 ## Workflow
 
 ### Phase 1: Define the Problem
-Invoke the **problem-definition** skill. Work with the user to sharpen their business question into a decision-oriented problem statement with clear scope and boundaries.
+Invoke the **problem-definition** skill. Work with the user to sharpen their business question into a decision-oriented problem statement with clear scope and boundaries. The skill also runs the premise / root-cause check and fills the Decision Frame fields of the Precision Anchor (Standard §2).
+
+After the skill returns and before Checkpoint 1: set `stakes_tier` and `domain_modules` (see Strategic Advisor Operating Standard above), write them to the Precision Anchor and to `engagement-state.json`, and present them with the problem statement.
 
 Do not proceed until the user confirms the problem statement.
 
@@ -155,7 +184,7 @@ Assess whether the problem benefits from a formal hypothesis tree:
 - If the question has multiple plausible answers and research needs prioritization → invoke the **hypothesis-tree** skill
 - If the question is narrow enough for direct research → skip to Phase 3
 
-If used, present the hypothesis tree to the user and get confirmation on research priorities before proceeding.
+If used, present the hypothesis tree to the user and get confirmation on research priorities before proceeding. Record `artifact_paths.hypothesis_tree` and append `"hypothesis-tree"` to `completed_phases`. If an active domain module lists default branches, the skill starts from them and prunes.
 
 ### Phase 2.5: Data Source Inquiry (MANDATORY — three required questions)
 
@@ -197,6 +226,8 @@ Invoke the **research** skill. It dispatches **two analysts in parallel**, then 
 
 The research brief must include the data availability summary from Phase 2.5. If internal data was provided, analyze it alongside public research. If the user indicated expert interviews are planned, identify the key uncertainties where expert input would be most valuable.
 
+The brief also carries the Decision Frame (options in scope, evidence that would change the answer), the stakes tier, and the research rows of any active domain module's Phase hooks. Analysts gather evidence on every option in scope — including status quo — and against the leading hypothesis (Standard §4). For `high-stakes` engagements, recommend the deep-dive analyst at Step 5.3 unless the gap assessment shows no decision-critical gaps.
+
 After the validator completes, the research skill will present an executive summary and a Deep Research assessment identifying under-explored sub-dimensions. The user can choose to dispatch a third "deep dive" agent targeting those specific gaps, or proceed with the existing research base.
 
 ### Phase 3.5: Expert Interviews (if indicated in Phase 2.5)
@@ -211,6 +242,8 @@ If the user indicated during the Data Source Inquiry that expert interviews woul
 3. **Process** (when notes are uploaded): Extract claims, assign CS scores (CS-2 for direct experience, CS-3 for opinion/hearsay), cross-reference against public findings. Flag conflicts and resolve by prioritizing the higher-quality and more precise source.
 4. **Integrate**: Feed confirmed, enhanced, and net-new findings back into the research base. Update Research Notes entries.
 
+Guides include at least one probe designed to disconfirm the leading hypothesis, and probe the "evidence that would change the answer" listed in the Decision Frame.
+
 If expert interviews reveal significant conflicts with public research or surface entirely new information, consider a targeted follow-up research pass before proceeding to sense-check.
 
 ### Phase 4: Sense-Check (MANDATORY — produces a written report)
@@ -219,7 +252,8 @@ Invoke the **sense-check** skill. This is NOT optional and cannot be replaced wi
 - Key vulnerabilities
 - Steel-man counter-narrative
 - Math checks
-- Analytical traps analysis
+- Analytical traps analysis (plus the domain traps of any active module)
+- Red-Team & Pre-Mortem, including invalidation conditions (depth per stakes tier)
 - Question-Answer Precision Verdict (PRECISE / PARTIAL / DRIFTED)
 
 A DRIFTED verdict is a hard stop — loop back to Phase 3 for targeted research.
@@ -235,9 +269,12 @@ Include the Deliverable Blueprint from the Precision Anchor in the brief/input f
 Invoke the **synthesis** skill. This step transforms the evidence into an argument. It is NOT the same as organizing findings by topic — it answers the question "so what should the client do?"
 
 The synthesis skill must produce a written Storyline Document containing:
-- One-sentence governing message (tested against the Precision Anchor)
+- One-sentence governing message (tested against the Precision Anchor) that takes a position — or states which missing evidence blocks the decision
 - 2-4 key arguments with evidence mapped to each
+- Options & trade-offs comparison (2-4 distinct options incl. status quo; why the winner wins, why each alternative loses) — or a one-line justification when not applicable
+- Value case (labeled inputs → calculation → range → sensitivity → implication)
 - Counter-argument section
+- Recommendation, execution plan, and decision gates (Standard §9–§10)
 - Headline sequence (must read as a coherent argument without supporting text)
 - Evidence map (traceability table: headline → evidence → source → CS score)
 - Precision Anchor Alignment statement (DIRECTLY / PARTIALLY / WITH QUALIFICATION)
@@ -261,7 +298,7 @@ Dispatch the **synthesis-critic** agent. Its full role and required inputs are d
    - `research_validated` (`research-validated.md`)
    - `sense_check` (`sense-check.md`)
 
-2. The critic runs eight checks (governing message altitude, evidence backing, [ADJACENT] vs. [DIRECT] handling, client-objection carry-forward, headline-sequence-as-argument, gap qualification, Deliverable Blueprint coverage, value-add precedence) and writes `storyline-critique.md` to the workspace with a binary PASS / FAIL verdict.
+2. The critic runs thirteen checks — eight fidelity checks (governing message altitude, evidence backing, [ADJACENT] vs. [DIRECT] handling, client-objection carry-forward, headline-sequence-as-argument, gap qualification, Deliverable Blueprint coverage, value-add precedence) and five decision-quality checks (recommendation completeness, options and trade-offs, value-case integrity, execution and decision gates, decision-critical analysis gaps incl. active domain modules) — and writes `storyline-critique.md` to the workspace with a binary PASS / FAIL verdict.
 
 3. **If PASS**: present both the storyline and the critique to the user at Checkpoint 4. On user approval, append `"storyline-critique"` to `completed_phases` and proceed to Phase 6.
 4. **If FAIL**: route control back to synthesis with the critique. Regenerate `storyline.md`, then re-run synthesis-critic. **Client-report cannot begin until either (a) synthesis-critic returns PASS, or (b) the user, at Checkpoint 4, explicitly accepts the open risks listed in the FAIL critique.** When the user accepts open risks, record this in `engagement-state.json` (`checkpoint_4_storyline = "approved"` AND append `"storyline-critique"` to `completed_phases` with the acceptance noted in `next_required_action`). Without one of these two outcomes, the client-report preflight gate will block.
@@ -281,14 +318,19 @@ Include the Deliverable Blueprint from the Precision Anchor in the brief/input f
 
 **Research Notes / source traceability requirement:** Regardless of format, source traceability must be included — adapted to the format. For Word documents: the Research Notes section as specified in the client-report skill. For Excel: a Sources sheet listing every reference cited in the matrix cells. For PowerPoint: a Sources appendix slide. The traceability requirement is non-negotiable; the specific format adapts.
 
-The report MUST include:
-- Executive summary (half page)
+The deliverable MUST include (adapted to the format — sections in .docx, sheets in .xlsx, slides in .pptx):
+- Executive summary that opens with the decision and the recommendation (or the evidence blocking it) and why
 - Body sections following the synthesis headline sequence, using the "Data → So What → Now What" pattern and industry-standard terminology alongside plain-language explanations
+- Options considered and why the rejected ones lose (when the storyline has an option comparison)
+- Value case with labeled assumptions and sensitivity (when the storyline has one)
 - Counter-argument section addressing: the steel-man counter-narrative, ALL client-raised objections (from the sense-check's Client-Raised Objections Inventory), and foreseeable operational risks
-- Specific recommendations — every sourced data point must lead to an actionable recommendation
+- Specific recommendations, an execution plan (horizons, roles, KPIs, dependencies), decision gates with stop/pivot thresholds, and what could change the answer — every sourced data point must lead to an actionable recommendation
+- Any deliverable requirements in the client-report row of an active domain module's Phase hooks
 - Research Notes section (MANDATORY — final section, compiled from the validator's source registry, providing full traceability for every data point in the report)
 
-The client-report quality review MUST include all mandatory checks (5a through 5l), including:
+For .xlsx and .pptx deliveries (which bypass the client-report skill), apply the same decision contract: an Executive / Recommendation sheet or slide, an Options sheet/slide, an Execution & Gates sheet/slide, and the Sources sheet/appendix. The deliverable-validator audits it in every format.
+
+The client-report quality review MUST include all mandatory checks (5a through 5n), including:
 - Citation completeness self-audit (no uncited claims)
 - Assumption labeling audit (illustrative vs. sourced numbers clearly distinguished)
 - Source-type-aware confidence language audit
@@ -296,6 +338,8 @@ The client-report quality review MUST include all mandatory checks (5a through 5
 - Cross-section linkage review
 - Client Question Checklist verification (every client question answered or acknowledged)
 - Expert-sourced content retention check (no expert finding dropped without explanation)
+- Recommendation completeness check (what / why / why not / focus / how / measure / stop-change / what could change the answer)
+- Epistemic labeling and precision check (fact vs. calculation vs. estimate vs. assumption vs. judgment; no false precision)
 
 COMMON FAILURE MODE: The agent bypasses the client-report skill and writes the document directly, producing a well-formatted document that lacks the Research Notes section, the counter-argument section, and the quality review. The client-report skill is not just about formatting — it enforces analytical rigor in the final deliverable.
 
@@ -316,7 +360,7 @@ The agent that wrote the report cannot objectively audit it. Dispatch the dedica
    - `sense_check` (`sense-check.md`)
    - `storyline` (`storyline.md`)
 
-2. The validator runs the checks defined in `agents/deliverable-validator.md` (Research Notes count match, source traceability, counter-argument coverage, client question coverage, headline-to-section fidelity, altitude qualification, banned language, assumption labeling, expert-anchor / strategic conflict, format-specific). Check A (Research Notes count match) is a hard gate.
+2. The validator runs the checks defined in `agents/deliverable-validator.md` (Research Notes count match, source traceability, counter-argument coverage, client question coverage, headline-to-section fidelity, altitude qualification, banned language, epistemic labeling, expert-anchor / strategic conflict, format-specific, recommendation and execution carry-forward). Check A (Research Notes count match) is a hard gate.
 
 3. The validator writes `deliverable-gap-report.md` to the workspace with a binary PASS / FAIL verdict, and updates `engagement-state.json` per its agent definition.
 
@@ -331,7 +375,7 @@ COMMON FAILURE MODE: The agent decides the report "looks good enough" and skips 
 The following checkpoints require presenting output to the user and waiting for their response before proceeding. These are not optional efficiency trade-offs — they are quality gates that catch errors, incorporate user knowledge, and prevent wasted work.
 
 **CHECKPOINT 1 — Problem Statement (Phase 1)**
-Present the problem statement, Precision Anchor (including the Deliverable Blueprint), AND the Client Question Checklist. Wait for user confirmation.
+Present the problem statement (including the premise check), Precision Anchor (including the Decision Frame and the Deliverable Blueprint), the Client Question Checklist, the proposed stakes tier, and the active domain modules. Wait for user confirmation.
 DO NOT proceed to research until the user confirms.
 
 **CHECKPOINT 2 — Research Package (Phase 3)**
@@ -339,11 +383,11 @@ After the validator completes, present the validated research package to the use
 DO NOT proceed to sense-check until the user responds.
 
 **CHECKPOINT 3 — Sense-Check Report (Phase 4)**
-Produce the full sense-check report (claim inventory, triangulation, steel-man, math checks, precision verdict). Present to the user.
+Produce the full sense-check report (claim inventory, triangulation, steel-man, math and sensitivity checks, red-team and pre-mortem with invalidation conditions, precision verdict). Present to the user.
 DO NOT proceed to synthesis until the user has seen the sense-check results.
 
 **CHECKPOINT 4 — Storyline + Critique (Phase 5 / 5.5)**
-Present BOTH the synthesis output (governing message, headline sequence, evidence map) AND the synthesis-critic's Storyline Critique Report.
+Present BOTH the synthesis output (governing message, recommendation, options comparison, value case, execution plan and decision gates, headline sequence, evidence map) AND the synthesis-critic's Storyline Critique Report.
 - If the critique returned PASS, ask: "The storyline passes the independent critique. Any adjustments before I write the report?"
 - If the critique returned FAIL, present the failed checks and ask: "The independent critique flagged the issues above. Do you want me to (a) regenerate the storyline to address them, or (b) accept these open risks and proceed to the report anyway?"
 DO NOT proceed to the report until the user has either approved a PASS critique OR explicitly accepted the open risks of a FAIL critique. If they accept open risks, record this in engagement-state.json as described in Phase 5.5.
@@ -352,6 +396,12 @@ DO NOT proceed to the report until the user has either approved a PASS critique 
 After deliverable-validator returns PASS, present the validated deliverable and the Deliverable Gap Report to the user. If FAIL, do not present — return to client-report.
 
 ## Key Principles Throughout
+
+**Improve the decision, not the mood.** Take a position when the evidence allows; say which evidence is missing when it does not. Challenge the premise and the user's framing when they are wrong (Standard §1).
+
+**Quantify what matters, honestly.** Ranges, labeled assumptions, sensitivity on the drivers that move the answer. No fake precision (Standard §3, §6).
+
+**Reasoning over frameworks.** Use the analysis the decision needs; do not add frameworks for appearance (Standard §5).
 
 **Be explicit about evidence quality.** Never present a weak finding as a strong one. Use confidence levels and ranges.
 

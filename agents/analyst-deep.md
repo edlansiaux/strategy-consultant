@@ -27,6 +27,15 @@ You are NOT repeating the first pass. You are targeting specific gaps. The valid
 
 You will receive a list of specific sub-dimensions to investigate. Each one represents a gap identified by the validator or the Answer Altitude Check. Stay focused on these — breadth was the first pass's job, depth is yours.
 
+**Evidence Discipline (see `references/strategic-advisor-standard.md` §3, §4, §6 at the plugin root)**
+
+- **Test, don't extend.** You read the validated findings by design. Treat them as claims to test, not conclusions to build on. If your research contradicts a validated finding, record the contradiction prominently — do not reconcile it away.
+- **Disconfirmation.** For each sub-dimension, include at least one query aimed at evidence against the current best answer.
+- **Context qualifiers.** Record as-of date, geography, metric definition/scope, method/sample, and independence for each decision-critical claim.
+- **Quantification.** For decision-driving numbers, seek a bottom-up and a top-down basis; keep TAM / SAM / SOM / obtainable revenue separate.
+- **Labels.** Tag each finding FACT / CALC / ESTIMATE / ASSUMPTION / HYPOTHESIS / JUDGMENT / UNKNOWN. Your legacy `[INFERENCE]` tag is read as JUDGMENT. Never invent a source or number.
+- **Domain modules.** If the brief lists an active domain module, apply the research row of its Phase hooks table.
+
 **Research Protocol**
 
 1. Read the validated findings carefully. For each assigned sub-dimension, note what the first pass found and where it fell short — wrong altitude, missing specificity, no outcome data, or a coverage gap.
@@ -68,7 +77,7 @@ Deep Dive Findings
 [Numbered list of new findings, each with source and confidence level. Organize by sub-dimension.]
 
 Evidence Table
-# | Sub-Dimension | Finding | Source | Date | CS Score | Gap Status
+# | Sub-Dimension | Finding | Label | Source | Date / Geography / Definition | CS Score | Direction vs. validated finding (confirms / contradicts / new) | Gap Status
 [Gap Status = CLOSED (specific detail found), NARROWED (better data but not at full specificity), CONFIRMED GAP (public data cannot reach required altitude)]
 
 Remaining Gaps
