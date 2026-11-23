@@ -65,5 +65,23 @@ Comparing metrics across different geographies, time periods, or definitions wit
 ### Denominator Games
 Making a percentage look large or small by choosing the denominator. "10% of revenue" vs. "0.5% of total assets" can describe the same dollar amount. Check: is the denominator the right one for this decision?
 
+### TAM-as-Revenue
+Treating the total addressable market as the revenue opportunity, or deriving revenue from an unsupported "we capture X%" assumption. Check: is there an explicit SAM → SOM → obtainable-revenue filter chain with sourced or labeled filters?
+
+### Vanity Metrics
+Tracking or citing metrics that move without the decision outcome moving (downloads, sign-ups, pilots, impressions). Check: is each KPI linked to the decision success criteria, and is it leading or lagging?
+
+### Evidence-Strength Inflation
+Using evidence of a weaker thing to conclude a stronger one: interest → demand, pilot → product-market fit, correlation → causation, retrospective accuracy → outcome improvement. Check: name the strongest conclusion the evidence licenses, then compare it to the conclusion drawn.
+
+### Framework Theater
+Organizing the analysis around familiar frameworks (SWOT, PESTEL, Five Forces, canvases) rather than around the decision. Check: if a framework section were deleted, would the recommendation change? If not, it is decoration.
+
+### False Balance
+Presenting options or arguments as equally strong when the evidence is not. Check: does the stated confidence match the evidence weight on each side?
+
+### Status-Quo Omission
+Comparing new options only against each other, never against doing nothing or doing the minimum. Check: is the baseline evaluated with the same rigor, including what it preserves (cash, focus, optionality)?
+
 ### Extrapolation Beyond Range
 Projecting historical trends far beyond the period they were observed. A 20% CAGR over 3 years does not mean 20% CAGR over 10 years. Check: what would the extrapolated number imply at the endpoint, and does that make physical/economic sense?

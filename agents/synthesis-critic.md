@@ -50,11 +50,19 @@ If any are missing, STOP and report which inputs are missing.
 5. **`research-validated.md`** — the validated evidence base, including alignment markers
    ([DIRECT] / [SUPPORTING] / [ADJACENT]) and CS scores.
 6. **`sense-check.md`** — the Question-Answer Precision Verdict, Client-Raised Objections
-   Inventory, Evidence-Implied Risks, and Value-Add Opportunities.
+   Inventory, Evidence-Implied Risks, Value-Add Opportunities, Sensitivity Analysis,
+   Red-Team & Pre-Mortem, and Invalidation Conditions.
+
+Also read `references/strategic-advisor-standard.md` (plugin root) and any domain-module file
+listed on the Precision Anchor's `Domain modules:` line. These are reference doctrine, not
+engagement inputs; their absence does not block the critique, but Checks 9–13 are then run
+against the storyline's own Recommendation section and noted as such.
 
 ## Critique checks
 
 Each check produces PASS or FAIL with a short note. Any FAIL fails the whole critique.
+
+### Fidelity checks (1–8)
 
 **Check 1 — Governing message answers the exact client question.**
 Place the Precision Anchor's Question and Success Metric next to the storyline's Governing
@@ -106,6 +114,25 @@ Verify the storyline's Value-Add sections sit AFTER the core arguments (not befo
 place of them). Value-add must be additive, not substitutive. If a value-add section has
 been promoted to a key argument while a Precision Anchor sub-question went unanswered, FAIL.
 
+### Decision-quality checks (9–13)
+
+Checks 1–8 test fidelity to the evidence. Checks 9–13 test whether the storyline is a decision a senior advisor would defend — challenging both the logic and the evidence. They apply `references/strategic-advisor-standard.md` (plugin root) §7–§10 and the synthesis-critic row of any domain module listed in the Precision Anchor. Depth follows `engagement-state.json.stakes_tier` (absent → `strategic`). For reference/coverage-type deliverables, Checks 9–12 accept an explicit, reasoned "not applicable" statement in the storyline; silence is never accepted.
+
+**Check 9 — Recommendation takes a position and is complete.**
+The governing message chooses — or states the specific missing evidence and the decision it blocks. The Recommendation section covers every element of §9 (what, why, why not, focus and what not to do, how, measure, stop/change, what could change the answer). Generic recommendations ("improve marketing", "use AI") without a specific choice, mechanism, and measure FAIL. A storyline that enumerates options without choosing, when the evidence allows a choice, FAILs.
+
+**Check 10 — Options are genuine and trade-offs explicit.**
+2–4 genuinely distinct options, including status quo / do-minimum where it is a real alternative. Criteria are decision-relevant. The winner's advantage is argued from evidence; each credible alternative has a stated losing trade-off; conditions that would reverse the choice are stated. FAIL if options are variants of one choice, if the status quo was silently omitted, if all options look equally attractive, or if `research-validated.md` Evidence Balance & Option Coverage shows an option was compared without evidence and the storyline does not say so.
+
+**Check 11 — Value case and quantification integrity.**
+Every number in the governing message, options table, and value case carries its label (§3); inputs → calculation → range → sensitivity → implication is traceable; TAM / SAM / SOM / obtainable revenue are not conflated; no unsupported share-capture assumption; precision does not exceed inputs; expert anchors are preserved (`expert-anchor-and-conflicts.md`). Recompute at least two key calculations with `Bash`. FAIL on any arithmetic error, unlabeled constructed number, or conflation. If value is at stake and no value case exists, FAIL unless the storyline states why it cannot be quantified.
+
+**Check 12 — Execution plan, decision gates, and invalidation are concrete.**
+Execution actions are sequenced by horizon, with role-based owners (no invented names), KPIs split into leading and lagging, and dependencies. Decision gates have measurable go / pivot / stop thresholds and a next decision date. The Invalidation Conditions from `sense-check.md` appear in the gates or in "what could change the answer". The storyline's recommendation survives sense-check's Red-Team & Pre-Mortem — if a pre-mortem failure cause directly undermines the recommendation and the storyline neither mitigates it nor changes the recommendation, FAIL.
+
+**Check 13 — Decision-critical analysis gaps.**
+Identify analysis that the decision needs but the storyline does not contain — e.g. no base rate for a high-risk move, no sensitivity on the driver that flips the answer, no assessment of the buyer/payer for a product decision, no capital plan for a venture verdict, no regulatory qualification for a clinical claim, an evidence rung exceeded. Apply the synthesis-critic row of every active domain module. Distinguish (a) gaps the storyline acknowledges as qualifications — PASS with note — from (b) gaps it silently ignores — FAIL. Also flag framework theater: sections organized around a framework rather than an insight.
+
 ## Output
 
 Write `<workspace_path>/storyline-critique.md` with this structure:
@@ -129,6 +156,14 @@ Date: <ISO timestamp>
 | 6. Gaps and qualifications explicit | PASS/FAIL | ... |
 | 7. Deliverable Blueprint coverage | PASS/FAIL | ... |
 | 8. Value-add does not displace precision | PASS/FAIL | ... |
+| 9. Recommendation takes a position and is complete | PASS/FAIL | ... |
+| 10. Options genuine, trade-offs explicit | PASS/FAIL | ... |
+| 11. Value case and quantification integrity | PASS/FAIL | ... |
+| 12. Execution, decision gates, invalidation concrete | PASS/FAIL | ... |
+| 13. Decision-critical analysis gaps | PASS/FAIL | ... |
+
+## Strongest Remaining Objection
+[One paragraph: the single objection a skeptical board member would raise against this storyline after reading it, and whether the storyline answers it. Informational — it does not change the verdict by itself.]
 
 ## Findings (one section per failed check)
 ### Check N — <name>

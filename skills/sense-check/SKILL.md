@@ -35,6 +35,8 @@ At the end of this phase, append `"sense-check"` to `completed_phases`, update `
 - `../../references/counter-argument-sources.md` — the three tributaries (steel-man, client-raised objections, evidence-implied risks) you must produce in Step 3.
 - `../../references/expert-anchor-and-conflicts.md` — how expert claims and strategic conflicts must be preserved (relevant in Step 1 / Step 2 when assessing claims that originated from expert interviews).
 - `references/analytical-traps.md` — the trap checklist used in Step 6.
+- `../../references/strategic-advisor-standard.md` — §3 (labels used in the claim inventory), §6 (quantification and sensitivity rules used in Step 4), §8 (red-team and pre-mortem items used in Step 6.5), §11 (depth by stakes tier).
+- `../../references/domains/*.md` — if the Precision Anchor lists domain modules, apply the sense-check row of each module's Phase hooks and its Domain traps table in Step 6.
 
 These references are the source of truth. The steps below are the phase-specific actions; they do not re-explain the underlying doctrine.
 
@@ -45,6 +47,8 @@ List every substantive claim that the eventual storyline will rest on. For each 
 - What evidence supports it
 - How many independent sources corroborate it
 - What confidence level the research assigned
+- Its epistemic label (FACT / CALC / ESTIMATE / ASSUMPTION / HYPOTHESIS / JUDGMENT / UNKNOWN — Standard §3). A load-bearing claim labeled HYPOTHESIS, ASSUMPTION, or UNKNOWN is a vulnerability by definition and goes into Key Vulnerabilities.
+- Whether the evidence actually supports the conclusion drawn from it, or only something weaker (e.g. evidence of interest used to conclude demand; correlation used to conclude causation)
 
 ### Step 2: Triangulate
 For each major claim, check whether the same conclusion holds when approached from different angles:
@@ -85,6 +89,11 @@ For every quantitative claim:
 - Are the units consistent? (Market share percentages vs. absolute revenue vs. volume)
 - Are comparisons apples-to-apples? (Same geography, same time period, same definition)
 - Is the precision warranted? (Do not say "$4.237B" when the assumptions could swing by $500M — use ranges)
+- **Sensitivity**: Identify the drivers that move the decision-critical numbers most (1 for `tactical`, 2–3 for `strategic`, 3 plus an explicit downside case for `high-stakes`). Show how the result moves across a plausible range of each, and whether any plausible value flips the decision.
+- **Market-size discipline**: Are TAM, SAM, SOM, and obtainable revenue kept separate? Is any revenue figure derived from an unsupported share-capture percentage?
+- **Triangulation of numbers**: Where both bottom-up and top-down bases exist, do they agree within a reasonable band? If not, which is preferred and why?
+- **Base rates**: What is the base rate of success for this type of move (entry, launch, acquisition, transformation, venture stage)? Does the emerging conclusion assume an outcome far above it, and on what evidence?
+- **What must be true**: State the breakeven conditions under which the emerging recommendation creates value. These feed the decision gates in synthesis.
 
 ### Step 5: Question-Answer Precision Check
 This is the most important check in the sense-check process. Re-read the **Precision Anchor** from the problem-definition phase, then ask:
@@ -141,6 +150,23 @@ Run through this checklist:
 
 **Anchoring**: Are we anchored on the first number we found rather than the best number?
 
+Then run the remaining traps in `references/analytical-traps.md` and, if a domain module is active, its Domain traps table.
+
+### Step 6.5: Red-Team and Pre-Mortem (MANDATORY — depth by stakes tier)
+Apply `../../references/strategic-advisor-standard.md` §8 to the emerging conclusion. Item 1 (strongest counter-argument) is the steel-man already written in Step 3 Part A — reference it, do not rewrite it. Produce items 2–9; for `tactical` engagements items 2, 8, and 9 are sufficient.
+
+Key outputs:
+- **Most fragile assumption** and what happens to the conclusion if it is wrong.
+- **Actor objections** (customer, competitor, regulator, investor, operator, skeptical board member — those relevant).
+- **Second-order effects and opportunity cost**, including what the status-quo option preserves.
+- **Cheaper / faster / reversible test** that could answer the question before full commitment.
+- **Pre-mortem**: three most likely causes of failure 18–24 months out.
+- **Invalidation conditions**: measurable signals that would trigger pivot, pause, or stop.
+
+Integration rule: every pre-mortem failure cause and actor objection that is not already in the Evidence-Implied Risks table is added to it (or to the Client-Raised Objections Inventory if the client raised it). This carries them through the existing counter-argument doctrine to synthesis, synthesis-critic Check 4, and deliverable-validator Check C without a parallel tracking mechanism.
+
+If the red team shows that the emerging conclusion does not survive, say so in the Overall Assessment and state the revised emerging conclusion. Do not bury it.
+
 ### Step 7: Produce the Sense-Check Report
 
 ```
@@ -152,8 +178,8 @@ Run through this checklist:
 [If DRIFTED: what question is the analysis actually answering? What would bring it back on track?]
 
 ## Claim-by-Claim Assessment
-| Claim | Evidence Strength | Triangulated? | Counter-Argument | Verdict |
-|-------|------------------|--------------|-----------------|---------|
+| Claim | Label | Evidence Strength | Triangulated? | Counter-Argument | Verdict |
+|-------|-------|------------------|--------------|-----------------|---------|
 
 ## Coverage Matrix (if Deliverable Blueprint has Coverage Dimensions)
 | Dimension Unit | Status (COVERED / THIN / GAP) | Notes |
@@ -179,10 +205,22 @@ Run through this checklist:
 [High-value findings from the research base that go beyond the Precision Anchor but would materially elevate the deliverable. For each: the finding, why it matters to the client, and whether the current storyline would include or filter it out.]
 
 ## Math Checks
-[Results of back-of-envelope sanity checks on key numbers]
+[Results of back-of-envelope sanity checks on key numbers; market-size discipline; bottom-up vs. top-down triangulation; base rates]
+
+## Sensitivity Analysis
+| Driver | Base value (label) | Plausible range | Effect on result | Flips the decision? |
+|--------|-------------------|-----------------|------------------|---------------------|
+[What must be true: the breakeven conditions for the emerging recommendation]
 
 ## Analytical Traps Identified
-[Any biases or logical errors found, with specific examples]
+[Any biases or logical errors found, with specific examples — including domain traps when a module is active]
+
+## Red-Team & Pre-Mortem
+[Most fragile assumption · actor objections · second-order effects and opportunity cost · cheaper/reversible test · three pre-mortem failure causes. Note which items were added to the Evidence-Implied Risks table.]
+
+## Invalidation Conditions
+| Signal | Threshold | Response (pivot / pause / stop / escalate) |
+|--------|-----------|--------------------------------------------|
 
 ## Recommendation
 [Proceed to synthesis / Revisit specific research areas / Downgrade confidence on specific claims / REDIRECT — analysis has drifted, needs targeted research on the actual question]

@@ -40,6 +40,16 @@ You will receive a dynamically generated research angle specific to this engagem
 
 Regardless of what angle you are assigned, always maintain a critical eye. Within your assigned territory, actively seek disconfirming evidence, failure cases, and risk factors — not just the bull case. This is not about being contrary. It is about ensuring that findings within your angle are stress-tested, not just confirmed.
 
+**Evidence Discipline (applies to every finding — see `references/strategic-advisor-standard.md` §3, §4, §6 at the plugin root)**
+
+- **Independence.** Do not read the other analyst's memo or any `research-*.md` file other than your own. Work only from the brief. Your value comes from reaching conclusions by an independent path.
+- **Disconfirmation.** At least a quarter of your queries must target evidence AGAINST the leading hypothesis, failure cases, or competing explanations within your angle. Record undermining evidence with the same rigor as supporting evidence.
+- **Options.** Gather decision-relevant evidence on every option in the brief's Decision Frame that falls within your angle — including the status quo.
+- **Context qualifiers.** For each decision-critical claim, record as-of date, geography, metric definition/scope, method/sample where relevant, and independence/conflict of interest. A strong source on the wrong geography or definition is an altitude problem, not strong evidence.
+- **Quantification.** For decision-driving numbers, look for both a bottom-up and a top-down basis; report both and the gap. Keep TAM, SAM, SOM, and obtainable revenue separate.
+- **Labels.** Tag each finding FACT / CALC / ESTIMATE / ASSUMPTION / HYPOTHESIS / JUDGMENT / UNKNOWN. Never invent a source, quote, statistic, competitor capability, or financial number.
+- **Domain modules.** If the brief lists an active domain module, read its file and apply the research row of its Phase hooks table.
+
 **Research Protocol**
 
 1. Read the research brief carefully. Identify the core question, your assigned research angle, and any specific hypothesis branches to investigate. Plan your search strategy around your angle — what source types, what sub-questions, what search queries will best serve your assigned territory.
@@ -85,11 +95,15 @@ Write your findings as a structured research memo:
 [Numbered list of substantive findings, each with source and confidence level]
 
 ## Evidence Table
-| # | Finding | Source | Date | CS Score | Supports Hypothesis? |
-|---|---------|--------|------|----------|---------------------|
+| # | Finding | Label | Source | Date / Geography / Definition | CS Score | Direction (supports / undermines / neutral) | Option(s) concerned |
+|---|---------|-------|--------|-------------------------------|----------|---------------------------------------------|---------------------|
 
 ## Contrarian Evidence & Risk Factors
-[Findings that challenge the prevailing hypothesis or surface risks]
+[Findings that challenge the prevailing hypothesis or surface risks, failure cases, and competing explanations of the data. If none found, list the queries you ran.]
+
+## Quantitative Triangulation
+| Number | Bottom-up basis | Top-down basis | Gap and likely reason |
+|--------|-----------------|----------------|-----------------------|
 
 ## Information Gaps
 [What you could not find and where it likely lives]

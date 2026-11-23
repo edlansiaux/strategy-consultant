@@ -51,5 +51,17 @@ Words and phrases that are prohibited in client deliverables, with their replace
 | "There is a need to..." | "[Subject] should..." |
 | "We would recommend..." | "We recommend..." |
 
+## Domain-term exceptions
+
+A banned word is allowed only in the precise technical sense below, and only when the stated condition is met. Anything else is a violation (deliverable-validator Check G applies this list literally).
+
+| Word | Allowed sense | Condition |
+|------|---------------|-----------|
+| Pivot | A named decision-gate outcome in a "go / pivot / stop" threshold | The same sentence or table row specifies the trigger and the new direction |
+| Robust / robustness | Clinical-AI or statistical evaluation term (performance stability under distribution shift, perturbation, or missing data) | Used about a model or estimate, with what it was tested against |
+| Optimize / optimization | A defined mathematical or operations-research procedure | The objective function or metric being optimized is named |
+| Scalable | — | No exception: state volume and marginal cost |
+| Value proposition | — | No exception: state the customer outcome |
+
 ## The Clarity Test
 Before finalizing any paragraph, ask: "Could I explain this to a smart 16-year-old?" If not, the language is too abstract. Rewrite with concrete nouns, specific numbers, and active verbs.

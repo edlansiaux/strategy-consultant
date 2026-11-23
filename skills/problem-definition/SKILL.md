@@ -25,6 +25,13 @@ If neither is present, STOP. Do not proceed with Steps 1–7. Do not create a wo
 
 **Subcommands must not create workspaces.** Workspace creation, slug derivation, dating, and `engagement-state.json` initialization are owned exclusively by engagement-manager. If this skill detects it has been invoked through a continuation command without an active workspace, the correct action is to stop and route back — never to silently create a workspace and continue. That bypass rebuilds the orchestrator piecemeal and is a known v1.4-era failure mode that v1.5.0 explicitly removes.
 
+## References (read once, before drafting)
+
+- `../../references/strategic-advisor-standard.md` — §1 (posture: challenge the premise, take a position), §2 (Decision Frame fields carried in the Precision Anchor), §3 (labels for assumptions made when information is missing), §11 (stakes tier, proposed to engagement-manager).
+- `../../references/domains/*.md` — when engagement-manager activates a domain module, apply the problem-definition row of its Phase hooks table (extra Precision Anchor fields).
+
+These references are the source of truth. The steps below are the phase-specific actions.
+
 ## What a Good Problem Statement Contains
 
 A complete problem statement answers four questions in 2-4 sentences:
@@ -45,6 +52,17 @@ Most problem descriptions are incomplete. Common gaps:
 - The scope is undefined (global or one market? all products or one category?)
 - Success criteria are absent (grow by how much? over what timeframe? relative to what benchmark?)
 - The stakeholder's real concern is buried under corporate language
+- The baseline (current performance or status-quo alternative) and the value at stake are unknown
+- Only one course of action is on the table — the alternatives, including doing nothing, are unstated
+
+### Step 2.5: Premise and Root-Cause Check (MANDATORY)
+Before asking questions or drafting, test whether the stated problem is the real problem:
+- **Symptom or cause?** List what the client observes (symptoms) separately from the candidate explanations (causes). If the brief asks to fix a symptom, name the candidate causes the analysis must discriminate between.
+- **Right question?** Would answering the stated question actually change the decision? If a different question would drive more value (e.g. "how do we raise more?" when the binding issue is unit economics), say so and propose the reframed question alongside the original.
+- **Embedded solution?** If the brief presupposes the answer ("build an AI triage product" vs. "reduce time-to-triage"), separate the objective from the presupposed solution so the solution becomes one option among several.
+- **Weak idea?** If the evidence already in hand makes the premise look weak, state it plainly and constructively, with reasons, in the problem statement. Do not soften it into neutrality.
+
+Record the result as a one-line **Premise check** in the problem statement: `Holds` / `Reframed — [why]` / `Challenged — [why; what would resolve it]`. Delivery mode applies: state the challenge with reasoning; do not run a Socratic dialogue. The user decides at Checkpoint 1 whether to adopt a reframe.
 
 ### Step 3: Ask Targeted Questions
 Use the AskUserQuestion tool to fill critical gaps. Ask only what is needed to make the problem statement actionable — do not ask for information that can be discovered through research.
@@ -55,6 +73,11 @@ Priority questions (ask only what is missing):
 - What is the time horizon for action?
 - Are there known constraints (budget, organizational, regulatory)?
 - Who is the ultimate decision-maker and what do they care about most?
+- What is the baseline (current performance, or what happens if nothing changes) and roughly what value is at stake?
+- Which options are already on the table — and which have been ruled out, and why?
+- What result would make the decision owner change course?
+
+Keep the AskUserQuestion call within its 4-question limit: ask the context/documents question first, then the highest-impact missing Decision Frame fields. Anything not asked or not answered is filled with a labeled assumption (`[ASSUMPTION]`, Standard §3) and listed as an open question — missing information does not block a useful first analysis.
 
 ### Step 4: Draft the Problem Statement
 Write the problem statement in this format:
@@ -63,6 +86,8 @@ Write the problem statement in this format:
 **Tension**: [1 sentence on what has changed or what is at stake]
 **Question**: [The specific, decision-oriented question this engagement will answer]
 **Scope**: [Boundaries — geography, time horizon, business unit, constraints]
+**Premise check**: [Holds / Reframed — why / Challenged — why; from Step 2.5]
+**Open questions**: [Decision Frame fields still unresolved, with the assumption used meanwhile]
 
 ### Step 4.5: Envision the Best Possible Answer (MANDATORY)
 Before stress-testing the problem statement, concretely imagine what the client holds in their hands if this engagement succeeds perfectly. Write a Deliverable Blueprint:
@@ -93,6 +118,7 @@ Before presenting the problem statement, run three quick checks:
 1. **The partner test**: If a senior partner read only the Question line, would they immediately understand what work needs to happen?
 2. **The "so what" test**: Does answering this question actually change what the client does? If the answer is "interesting but doesn't drive action," the question is wrong.
 3. **The scope test**: Is this answerable in the time and resources available? If not, narrow it.
+4. **The decision test**: Are at least two genuinely distinct options (including status quo) named, and is it clear what evidence would make the decision owner choose one over the other? If not, the question is still a topic, not a decision.
 
 Present the problem statement to the user and ask for confirmation before any downstream analysis begins.
 
@@ -138,7 +164,24 @@ Success metric: [How we will know the answer is precise enough — e.g., "must q
 What a precise answer looks like: [1 sentence describing what the output must contain to actually answer the question — not an adjacent or easier question]
 What a non-answer looks like: [1 sentence describing the most likely drift — the adjacent question the analysis might accidentally answer instead]
 Deliverable Blueprint: [Reference the full Deliverable Blueprint from Step 4.5 above]
+
+DECISION FRAME (Strategic Advisor Operating Standard §2 — label unknowns [ASSUMPTION] or [UNKNOWN])
+Decision owner: [Who decides; whose incentives/constraints matter]
+Value at stake: [Order of magnitude, as a range, and of what kind — financial / operational / customer / strategic / clinical]
+Baseline: [Current state, or the status-quo outcome any option must beat]
+Target outcome: [Measurable result sought]
+Time horizon: [When the decision is taken; when value must materialize]
+Constraints: [Capital, talent, timing, technology, regulation, dependencies, risk tolerance]
+Decision success criteria: [Observable outcomes that would prove the chosen course worked — NOT the same as the answer Success metric above]
+Options in scope: [2–4 distinct options incl. status quo / do-minimum; note any ruled out and why]
+Evidence that would change the answer: [The finding(s) that would flip the likely recommendation]
+Premise check: [Holds / Reframed / Challenged — one line]
+Stakes tier: [tactical / strategic / high-stakes — proposed; engagement-manager confirms]
+Domain modules: [startup-venture / healthtech-medtech / none — set by engagement-manager]
+[Domain-specific fields required by the problem-definition row of any active domain module]
 ```
+
+The Success metric judges whether the *analysis answers the question*; Decision success criteria judge whether the *client's chosen course works*. Keep them distinct — downstream checks use both.
 
 The Precision Anchor must be included in the research brief, passed to the validator, and re-checked at synthesis. Its purpose is to prevent analytical drift — the common failure mode where the team finds interesting data that answers a different (often easier) question than the one the client actually asked.
 
@@ -147,3 +190,5 @@ The Precision Anchor must be included in the research brief, passed to the valid
 - Defining the problem so broadly that any analysis would take months
 - Defining it so narrowly that the answer is obvious and not worth the engagement
 - Confusing the client's stated problem with the real problem (the stated one is often a symptom)
+- Accepting a presupposed solution as the question, so that its alternatives are never evaluated
+- Silently dropping a weak premise instead of challenging it in the Premise check

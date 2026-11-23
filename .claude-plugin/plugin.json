@@ -1,7 +1,7 @@
 {
   "name": "strategy-consultant",
-  "version": "1.4.0",
-  "description": "Performs the analytical work of a strategy consultant — from problem definition through research, sense-checking, synthesis, and executive-grade client deliverables. Deploys independent research agents and validates findings for accuracy before producing a clear, cliché-free written report.",
+  "version": "1.6.0",
+  "description": "Performs the analytical work of a strategy consultant — from problem definition through research, sense-checking, synthesis, and executive-grade client deliverables. Frames the decision, challenges the premise, deploys independent research agents, validates and red-teams findings, compares options, and produces a cliché-free deliverable with a recommendation, value case, and execution plan. Optional startup/venture and HealthTech/MedTech domain modules.",
   "author": {
     "name": "Chip Alexandru"
   },
